@@ -487,7 +487,7 @@ def prepare_csv_enrol_test(data_folders, save_folder, verification_pairs_file):
             enrol_csv.append(csv_line)
 
         csv_output = csv_output_head + enrol_csv
-        csv_file = os.path.join(save_folder, ENROL_CSV)
+        csv_file = os.path.join(save_folder, "test", ENROL_CSV)
 
         # Writing the csv lines
         with open(csv_file, mode="w", newline="", encoding="utf-8") as csv_f:
