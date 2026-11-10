@@ -22,7 +22,7 @@ from speechbrain.utils.logger import get_logger
 logger = get_logger(__name__)
 OPT_FILE = "opt_voxceleb_prepare.pkl"
 TRAIN_CSV = "train.csv"
-DEV_CSV = "dev.csv"
+DEV_CSV = "identification.csv"
 TEST_CSV = "test.csv"
 ENROL_CSV = "enrol.csv"
 SAMPLERATE = 16000
@@ -103,13 +103,15 @@ def prepare_voxceleb(
         "split_speaker": split_speaker,
     }
 
-    if not os.path.exists(save_folder):
-        os.makedirs(save_folder)
+    for split in splits:
+        splitPath = os.path.join(save_folder, split)
+        if not os.path.exists(splitPath):
+            os.makedirs(splitPath)
 
     # Setting output files
     save_opt = os.path.join(save_folder, OPT_FILE)
-    save_csv_train = os.path.join(save_folder, TRAIN_CSV)
-    save_csv_dev = os.path.join(save_folder, DEV_CSV)
+    save_csv_train = os.path.join(save_folder, "train", TRAIN_CSV)
+    save_csv_dev = os.path.join(save_folder, "dev", DEV_CSV)
 
     # Create the data folder contains VoxCeleb1 test data from the source
     if source is not None:
@@ -521,7 +523,7 @@ def prepare_csv_enrol_test(data_folders, save_folder, verification_pairs_file):
             test_csv.append(csv_line)
 
         csv_output = csv_output_head + test_csv
-        csv_file = os.path.join(save_folder, TEST_CSV)
+        csv_file = os.path.join(save_folder, "test", TEST_CSV)
 
         # Writing the csv lines
         with open(csv_file, mode="w", newline="", encoding="utf-8") as csv_f:

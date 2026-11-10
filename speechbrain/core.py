@@ -1107,9 +1107,10 @@ class Brain:
 
     def _fit_valid(self, valid_set, epoch, enable):
         # Validation stage
+        avg_valid_loss = -1
+        self.on_stage_start(Stage.VALID, epoch)
+        self.modules.eval()
         if valid_set is not None:
-            self.on_stage_start(Stage.VALID, epoch)
-            self.modules.eval()
             avg_valid_loss = 0.0
             with torch.no_grad():
                 for batch in tqdm(
@@ -1127,7 +1128,7 @@ class Brain:
                         break
 
                 self.step = 0
-                self.on_stage_end(Stage.VALID, avg_valid_loss, epoch)
+        self.on_stage_end(Stage.VALID, avg_valid_loss, epoch)
 
     def fit(
         self,
