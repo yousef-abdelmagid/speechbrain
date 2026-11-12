@@ -21,10 +21,10 @@ from speechbrain.utils.logger import get_logger
 
 logger = get_logger(__name__)
 OPT_FILE = "opt_voxceleb_prepare.pkl"
-TRAIN_CSV = "train.csv"
+TRAIN_CSV = "all.csv"
 DEV_CSV = "identification.csv"
 TEST_CSV = "test.csv"
-ENROL_CSV = "enrol.csv"
+ENROL_CSV = "enroll.csv"
 SAMPLERATE = 16000
 
 
